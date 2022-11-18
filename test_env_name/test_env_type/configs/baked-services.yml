@@ -1,0 +1,4 @@
+kind: baked_services
+specs:
+  es:
+    version: 7.13

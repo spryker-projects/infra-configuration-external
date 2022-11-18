@@ -1,0 +1,11 @@
+kind: services
+specs:
+  yves:
+    cpu_limit: 512
+    memory_limit: 4096
+  boffice:
+    cpu_limit: 4096
+    memory_limit: 4096
+  glue:
+    cpu_limit: 999
+    memory_limit: 999
