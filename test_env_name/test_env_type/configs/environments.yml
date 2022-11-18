@@ -1,0 +1,22 @@
+kind: environments
+specs:
+  -
+    name: aldi-prod
+    type: prod
+    metadata: []
+  -
+    name: aldi-dev
+    type: dev
+    metadata: []
+  -
+    name: aldi-qa
+    type: dev
+    metadata: []
+  -
+    name: aldi-qa2
+    type: dev-qa-1
+    metadata: []
+  -
+    name: aldi-qa2
+    type: dev-qa-2
+    metadata: []

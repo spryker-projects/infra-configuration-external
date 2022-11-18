@@ -1,0 +1,41 @@
+kind: users
+specs:
+    -
+        username: guy1
+        email: guy1@spryker.com
+        roles:
+            developer:
+                - dev
+            admin:
+                - prod
+                - dev-qa-1
+                - dev-qa-2
+    -
+        username: guy2
+        email: guy2@spryker.com
+        roles:
+            developer:
+                - dev-qa-1
+                - dev-qa-2
+    -
+        username: guy3
+        email: guy3@spryker.com
+        roles:
+            developer:
+                - dev-qa-1
+                - dev-qa-2
+
+
+#Input
+# Users.yml (customer facing)
+# - username: dupont
+#   usermail: dupont@dupont.com
+#   roles:
+#     - developer:   <- ROLE_NAME == IAM GROUP
+#             -   dev      <- env_kind
+#             - qa
+#             - staging
+#     - operator:
+#             - production
+#     - admin:
+#           - dev
