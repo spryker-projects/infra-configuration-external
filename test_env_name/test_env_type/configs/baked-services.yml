@@ -1,7 +1,5 @@
 kind: baked_services
 specs:
-  elasticache:
-    engine_version: 3.2.10
   rds:
     engine_version: 3.100.100
   es:
