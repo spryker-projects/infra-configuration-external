@@ -1,0 +1,6 @@
+kind: baked_services
+specs:
+  rds:
+    engine_version: 222
+  es:
+    version: 222
