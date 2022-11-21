@@ -1,6 +1,6 @@
 kind: baked_services
 specs:
   rds:
-    engine_version: 333
+    engine_version: 444
   es:
-    version: 333
+    version: 444
