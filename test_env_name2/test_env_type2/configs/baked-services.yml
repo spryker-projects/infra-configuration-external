@@ -1,6 +1,0 @@
-kind: baked_services
-specs:
-  rds:
-    engine_version: 333
-  es:
-    version: 333
