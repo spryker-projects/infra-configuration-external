@@ -1,0 +1,52 @@
+locals {
+  service_name       = "jenkins" # Previous "jenkins" shorted for avoid aws_lb_target_group.name max 32 charachter in _lb_target_group_single (maybe a check in module must be introduced)
+  network_mode       = "awsvpc"
+  cpu_limit          = {{ cpu_limit | default(512, true) }}
+  memory_limit       = {{ memory_limit | default(2048, true) }}
+  efs_root_directory = "/"
+  volumes = {
+    jenkins-media = {
+      type         = "efs"
+      target       = "/media/jenkins"
+      efs_root_dir = "/"
+    }
+  }
+  scheduling_strategy                = "REPLICA"
+  desired_count                      = {{ desired_count | default(1, true) }}
+  health_check_grace_period_seconds  = {{ health_check_grace_period_seconds | default(15, true )}}
+  deployment_maximum_percent         = {{ deployment_maximum_percent | default(100, true) }}
+  deployment_minimum_healthy_percent = {{ deployment_minimum_healthy_percent | default(0, true) }}
+  autoscaling_enabled                = false
+  autoscaling_min_capacity           = {{ autoscaling_min_capacity | default(0, true) }}
+  autoscaling_max_capacity           = {{ autoscaling_max_capacity | default(0, true) }}
+  load_balancer_type                 = "internal"
+  deregistration_delay               = {{ deregistration_delay | default(10, true) }}
+  logs_expire                        = {{ logs_expire | default(60, true) }}
+  listener_mappings = {
+    jks = {
+      lb_protocol        = "TCP"
+      lb_port            = 80
+      container_protocol = "TCP"
+      container_port     = 8080
+      ssl_policy         = null
+      action             = "forward"
+    }
+  }
+  container_definition = {
+    name  = "jenkins"
+    image = null
+    mountPoints = [
+      {
+        containerPath = "/root/.jenkins"
+        sourceVolume  = "jenkins_root"
+      }
+    ]
+    portMappings = [
+      {
+        containerPort = 8080
+        hostPort      = 8080
+        protocol      = "tcp"
+      }
+    ]
+  }
+}
