@@ -3,7 +3,7 @@ locals {
   settings = {
     instance_size           = "db.t3.medium"
     multi_az                = False
-    engine_version          = "111"
+    engine_version          = "aaa"
     parameters_group_family = "mariadb10.3"
     storage_size            = 100
     master_username         = local.secrets.locals.master_username
