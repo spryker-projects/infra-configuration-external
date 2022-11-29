@@ -1,6 +1,0 @@
-kind: roles
-specs:
-  - developer
-  - operator
-  - admin
-  - qa
