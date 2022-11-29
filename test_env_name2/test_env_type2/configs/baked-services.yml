@@ -1,6 +1,6 @@
 kind: baked_services
 specs:
   rds:
-    engine_version: ccc
+    engine_version: ddd
   es:
-    version: ccc
+    version: ddd
