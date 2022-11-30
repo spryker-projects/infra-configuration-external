@@ -36,7 +36,14 @@ specs:
         roles:
             developer:
                 - dev
-                - prod            
+                - prod    
+    -
+        username: guy6
+        email: guy6@spryker.com
+        roles:
+            developer:
+                - dev
+                - prod              
 
 
 #Input
