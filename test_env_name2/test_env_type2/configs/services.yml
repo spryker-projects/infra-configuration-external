@@ -4,8 +4,8 @@ specs:
     cpu_limit: 513
     memory_limit: 513
   boffice:
-    cpu_limit: 513
-    memory_limit: 513
+    cpu_limit: 4096
+    memory_limit: 4097
   glue:
     cpu_limit: 513
     memory_limit: 513
