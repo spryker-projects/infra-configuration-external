@@ -1,8 +1,8 @@
 locals {
     service_name                       = "boffice"
     network_mode                       = awsvpc
-    cpu_limit                          = 513
-    memory_limit                       = 513
+    cpu_limit                          = 4096
+    memory_limit                       = 4097
     volumes                            = {}
     scheduling_strategy                = "REPLICA"
     desired_count                      = 2
