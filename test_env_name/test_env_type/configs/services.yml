@@ -1,11 +1,11 @@
 kind: services
 specs:
   yves:
-    cpu_limit: 2099
-    memory_limit: 2099
+    cpu_limit: 1099
+    memory_limit: 1099
   boffice:
     cpu_limit: 2099
     memory_limit: 2099
   glue:
-    cpu_limit: 2099
-    memory_limit: 2099
+    cpu_limit: 1099
+    memory_limit: 1099
