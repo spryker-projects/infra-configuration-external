@@ -1,11 +1,11 @@
 locals {
   secrets                   = read_terragrunt_config(find_in_parent_folders("secrets/common/spryker.hcl"))
   newrelic                  = read_terragrunt_config(find_in_parent_folders("config/monitoring/newrelic.hcl"))
-  spryker_ecs_services      = ['yves', 'glue', 'boffice', 'backapi', 'backgw', 'mportal', 'frontend', 'rabbitmq', 'blackfire'] // full list of enabled ecs services
+  spryker_ecs_services      = ['mportal', 'yves', 'glue', 'glue-storefront', 'glue-backend', 'boffice', 'backgw', 'frontend', 'rabbitmq', 'blackfire'] // full list of enabled ecs services
   spryker_nonecs_services   = ["jenkins"]
   spryker_services          = local.newrelic.locals.newrelic_integration.enable_production_mode ? concat(local.spryker_ecs_services, local.monitoring_services, local.spryker_nonecs_services) : concat(local.spryker_ecs_services, local.spryker_nonecs_services)
-  services_to_restart       = ['yves', 'glue', 'boffice', 'backapi', 'backgw', 'frontend']
-  spryker_ecr_repos         = ['yves', 'glue', 'boffice', 'backapi', 'backgw', 'jenkins', 'mportal', 'frontend', 'rabbitmq', 'blackfire', 'jenkins', 'pipeline'] # pipeline repository is obligatory starting from 6.0, docker/sdk produces image inside of it
+  services_to_restart       = ['mportal', 'yves', 'glue', 'glue-storefront', 'glue-backend', 'boffice', 'backgw', 'frontend']
+  spryker_ecr_repos         = ['mportal', 'yves', 'glue', 'glue-storefront', 'glue-backend', 'boffice', 'backgw', 'frontend', 'rabbitmq', 'blackfire', 'jenkins', 'pipeline'] # pipeline repository is obligatory starting from 6.0, docker/sdk produces image inside of it
   region                    = "eu-central-1"
   project_owner             = "<template:customer>"
   project_name              = "<template:customer-env>"
