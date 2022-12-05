@@ -9,6 +9,15 @@ specs:
             admin:
                 - prod
                 - dev-qa-1
+    -
+        username: guy2
+        email: guy2@spryker.com
+        roles:
+            developer:
+                - dev
+            admin:
+                - dev
+                - prod     
 
 #Input
 # Users.yml (customer facing)
