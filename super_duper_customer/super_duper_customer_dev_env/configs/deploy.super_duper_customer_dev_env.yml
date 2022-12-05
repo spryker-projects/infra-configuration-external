@@ -98,21 +98,6 @@ groups:
                         services:
                             session:
                                 namespace: 8
-            yves_eu:
-                application: yves
-                endpoints:
-                    date-time-configurator-example.spryker.local:
-                        entry-point: Configurator
-                    yves.de.spryker.local:
-                        store: DE
-                        services:
-                            session:
-                                namespace: 1
-                    yves.at.spryker.local:
-                        store: AT
-                        services:
-                            session:
-                                namespace: 2
             glue_eu:
                 application: glue
                 endpoints:
@@ -178,14 +163,6 @@ groups:
                         services:
                             session:
                                 namespace: 9
-            yves_us:
-                application: yves
-                endpoints:
-                    yves.us.spryker.local:
-                        store: US
-                        services:
-                            session:
-                                namespace: 5
             glue_us:
                 application: glue
                 endpoints:
