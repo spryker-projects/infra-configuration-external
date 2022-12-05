@@ -1,0 +1,32 @@
+kind: resources
+specs:
+    - iam:
+        developer:
+            - iam
+        admin:
+            - iam
+            - iam1
+            - iam2
+            - iam3
+        qa:
+            - iam
+            - iam1
+        operator:
+            - iam
+            - iam2
+            - iam3
+    - db:
+        developer:
+            - db
+        admin:
+            - db
+            - db1
+            - db2
+            - db3
+        qa:
+            - db
+            - db1
+        operator:
+            - db
+            - db2
+            - db3
