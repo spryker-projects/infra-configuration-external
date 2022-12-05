@@ -2,7 +2,7 @@ locals {
   settings = {
     storage_size          = 35
     encrypt               = False # Enable encryption at rest for ElasticSearch (only specific instance family types support it: m4, c4, r4, i2, i3 default: false)
-    version               = "7.7"
+    version               = "111"
     instance_size         = "t3.medium.elasticsearch"
     dedicated_master_type = "t3.medium.elasticsearch"
     port                  = 80
