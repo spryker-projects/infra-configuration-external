@@ -1,0 +1,68 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "${provider_version_constraints.aws}"
+    }
+    template = {
+      source  = "hashicorp/template"
+      version = "${provider_version_constraints.template}"
+    }
+    vault = {
+      source  = "hashicorp/vault"
+      version = "${provider_version_constraints.vault}"
+    }
+    newrelic = {
+      source  = "newrelic/newrelic"
+      version = "${provider_version_constraints.newrelic}"
+    }
+    local = {
+      source = "hashicorp/local"
+    }
+    archive = {
+      source = "hashicorp/archive"
+    }
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = ">= 2.16.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = "${provider_parameters.aws_region}"
+  default_tags {
+      tags = {
+        aws_region              = "${provider_parameters.aws_region}"
+        aws_account_id          = "${provider_parameters.aws_account_id}"
+        aws_account_name        = "${provider_parameters.aws_account_name}"
+        aws_account_environment = "${provider_parameters.aws_account_environment}"
+        customer_name           = "${provider_parameters.customer_name}"
+        release_version         = "${provider_parameters.release_version}"
+
+      }
+    }
+}
+
+provider "aws" {
+  alias  = "cloudfront"
+  region = "us-east-1" # CloudFront expects ACM resources in us-east-1 region only
+}
+
+provider "vault" {
+  address = "https://vault.spryker.systems:8200"
+  auth_login {
+    path = "auth/userpass/login/spryker-cloud-terraform"
+
+    parameters = {
+      password = "${provider_parameters.hashicorp_vault_password}"
+    }
+  }
+}
+
+provider "newrelic" {
+  account_id = "${provider_parameters.newrelic_account_id}"
+  api_key    = "${provider_parameters.newrelic_api_key}"      # usually prefixed with 'NRAK'
+  region     = "US"                                           # Valid regions are US and EU    
+}

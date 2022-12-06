@@ -1,0 +1,6 @@
+kind: baked_services
+specs:
+  rds:
+    engine_version: '10.5.5555'
+  elasticache:
+    engine_version: '3.2.111111'
