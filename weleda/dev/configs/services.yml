@@ -8,4 +8,4 @@ specs:
     memory_limit: 4444
   glue:
     cpu_limit: 5555
-    memory_limit: 5555
+    memory_limit: 7777

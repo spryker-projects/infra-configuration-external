@@ -2,7 +2,7 @@ locals {
     service_name                       = "glue"
     network_mode                       = awsvpc
     cpu_limit                          = 5555
-    memory_limit                       = 5555
+    memory_limit                       = 7777
     volumes                            = {}
     scheduling_strategy                = "REPLICA"
     desired_count                      = 2
