@@ -1,8 +1,8 @@
 locals {
   service_name                       = "yves"
   network_mode                       = "awsvpc"
-  cpu_limit                          = 512
-  memory_limit                       = 512
+  cpu_limit                          = 513
+  memory_limit                       = 513
   volumes                            = {}
   scheduling_strategy                = "REPLICA"
   desired_count                      = 2

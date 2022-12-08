@@ -3,4 +3,4 @@ specs:
   rds:
     engine_version: 777
   es:
-    version: 444
+    version: 777
