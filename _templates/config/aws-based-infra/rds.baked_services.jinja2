@@ -10,40 +10,40 @@ locals {
     max_allocated_storage   = {{ max_allocated_storage | default(0, true) }}
     apply_immediately       = {{ apply_immediately | default(true, true)}}
     cloudwatch_logs_exports = {
-      "error"     = {{ error | default(true, true)
-      "general"   = {{ general | default(true, true)
-      "slowquery" = {{ slowquery | default(true, true)
-      "audit"     = {{ audit | default(true, true)
+      "error"     = {{ cloudwatch_logs_exports.error | default(true, true)
+      "general"   = {{ cloudwatch_logs_exports.general | default(true, true)
+      "slowquery" = {{ cloudwatch_logs_exports.slowquery | default(true, true)
+      "audit"     = {{ cloudwatch_logs_exports.audit | default(true, true)
     }
     skip_final_snapshot = {{ skip_final_snapshot | default(true, true)}}
     performance_insights = {
-      enabled          = {{ enabled | default(true, true) }}
-      retention_period = {{ retention_period | default(7, true) }}
+      enabled          = {{ performance_insights.enabled | default(true, true) }}
+      retention_period = {{ performance_insights.retention_period | default(7, true) }}
     }
     backups = {
-      retention_period         = {{ retention_period | default(28, true) }}
-      hourly_snapshots_enabled = {{ hourly_snapshots_enabled | default(true, true) }}
+      retention_period         = {{ backups.retention_period | default(28, true) }}
+      hourly_snapshots_enabled = {{ backups.hourly_snapshots_enabled | default(true, true) }}
       rotate_snapshots = {
-        enabled                    = {{ enabled | default(true, true) }}
-        hourly_snapshots_period    = "{{ hourly_snapshots_period | default("60 hours ago", true) }}"
-        migration_snapshots_period = "{{ migration_snapshots_period | default("7 days ago", true) }}"
+        enabled                    = {{ backups.rotate_snapshots.enabled | default(true, true) }}
+        hourly_snapshots_period    = "{{ backups.rotate_snapshots.hourly_snapshots_period | default("60 hours ago", true) }}"
+        migration_snapshots_period = "{{ backups.rotate_snapshots.migration_snapshots_period | default("7 days ago", true) }}"
       }
     }
     parameters = {
       reboot_not_required = {
-        character_set_server     = "{{ character_set_server | default("utf8", true) }}"
-        character_set_client     = "{{ character_set_client | default("utf8", true) }}"
-        character_set_connection = "{{ character_set_connection | default("utf8", true) }}"
-        character_set_database   = "{{ character_set_database | default("utf8", true) }}"
-        character_set_filesystem = "{{ character_set_filesystem | default("utf8", true) }}"
-        character_set_results    = "{{ character_set_results | default("utf8", true) }}"
+        character_set_server     = "{{ parameters.reboot_not_required.character_set_server | default("utf8", true) }}"
+        character_set_client     = "{{ parameters.reboot_not_required.character_set_client | default("utf8", true) }}"
+        character_set_connection = "{{ parameters.reboot_not_required.character_set_connection | default("utf8", true) }}"
+        character_set_database   = "{{ parameters.reboot_not_required.character_set_database | default("utf8", true) }}"
+        character_set_filesystem = "{{ parameters.reboot_not_required.character_set_filesystem | default("utf8", true) }}"
+        character_set_results    = "{{ parameters.reboot_not_required.character_set_results | default("utf8", true) }}"
       }
       reboot_required = {
-        skip_name_resolve  = "{{ skip_name_resolve | default("1", true) }}"
-        thread_cache_size  = "{{ thread_cache_size | default("4", true) }}"
-        concurrent_insert  = "{{ concurrent_insert | default("1", true) }}"
-        thread_pool_size   = "{{ thread_pool_size | default("32", true) }}"
-        performance_schema = "{{ performance_schema | default("1", true) }}"
+        skip_name_resolve  = "{{ reboot_required.skip_name_resolve | default("1", true) }}"
+        thread_cache_size  = "{{ reboot_required.thread_cache_size | default("4", true) }}"
+        concurrent_insert  = "{{ reboot_required.concurrent_insert | default("1", true) }}"
+        thread_pool_size   = "{{ reboot_required.thread_pool_size | default("32", true) }}"
+        performance_schema = "{{ reboot_required.performance_schema | default("1", true) }}"
       }
     }
   }
