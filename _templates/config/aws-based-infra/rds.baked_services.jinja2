@@ -6,7 +6,7 @@ locals {
     engine_version          = "{{ engine_version | default("10.3.32", true) }}"
     parameters_group_family = "{{ parameters_group_family | default("mariadb10.3", true) }}"
     storage_size            = {{ storage_size | default(100, true) }}
-    master_username         = {{ master_username | default(local.secrets.locals.master_username) }}
+    master_username         = {{ local.secrets.locals.master_username }}
     max_allocated_storage   = {{ max_allocated_storage | default(0, true) }}
     apply_immediately       = {{ apply_immediately | default(true, true) }}
     cloudwatch_logs_exports = {
