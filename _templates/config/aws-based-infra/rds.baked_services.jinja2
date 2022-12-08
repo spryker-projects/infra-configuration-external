@@ -10,10 +10,10 @@ locals {
     max_allocated_storage   = {{ max_allocated_storage | default(0, true) }}
     apply_immediately       = {{ apply_immediately | default(true, true) }}
     cloudwatch_logs_exports = {
-      "error"     = {{ cloudwatch_logs_exports | default(true, true) }}
-      "general"   = {{ cloudwatch_logs_exports | default(true, true) }}
-      "slowquery" = {{ cloudwatch_logs_exports | default(true, true) }}
-      "audit"     = {{ cloudwatch_logs_exports | default(true, true) }}
+      "error"     = {{ cloudwatch_logs_exports.error | default(true) }}
+      "general"   = {{ cloudwatch_logs_exports.general | default(true) }}
+      "slowquery" = {{ cloudwatch_logs_exports.slowquery | default(true) }}
+      "audit"     = {{ cloudwatch_logs_exports.audit | default(true) }}
     }
     skip_final_snapshot = {{ skip_final_snapshot | default(true, true)}}
     performance_insights = {
