@@ -1,8 +1,67 @@
 kind: baked_services
 specs:
   rds:
-    engine_version: '10.5.7777'
+    instance_size: "db.t3.medium"
+    # multi_az: false   # covered by AZ
+    engine_version: "10.3.32"
+    parameters_group_family: "mariadb10.3"
+    ro_replicas_count: 0
+    storage_size: 100
+    master_username: "username"
+    max_allocated_storage: 0
+    apply_immediately: true
+    cloudwatch_logs_exports:
+      error: true
+      general: true
+      slowquery: true
+      audit: false
+    skip_final_snapshot: true
+    performance_insights:
+      enabled: true
+      retention_period: 7
+    backups:
+      retention_period: 28
+      hourly_snapshots_enabled: true
+      rotate_snapshots:
+        enabled: true
+        hourly_snapshots_period: "60 hours ago"
+        migration_snapshots_period: "7 days ago"
+    parameters:
+      reboot_not_required:
+        character_set_server: "utf8"
+        character_set_client: "utf8"
+        character_set_connection: "utf8"
+        character_set_database: "utf8"
+        character_set_filesystem: "utf8"
+        character_set_results: "utf8"
+      reboot_required:
+        skip_name_resolve: "1"
+        thread_cache_size: "4"
+        concurrent_insert: "1"
+        thread_pool_size: "32"
+        performance_schema: "1"
+
   elasticache:
-    engine_version: '3.2.2222'
+    instance_size: "cache.t3.medium" # previously t2.medium, BTW, are we really need medium (3 Gb) Redis on stage envs? We can use small (1.37 Gb)
+    port: 6379
+    number_cache_clusters: 1       # must be at least 2 if multi_az_enabled  TRUE
+    engine_version: "3.2.6" # newest is 3.2.10
+    parameter_group_family: "redis3.2"
+    # multi_az_enabled:            false  # covered by AZ
+    # automatic_failover_enabled:  false  # covered by AZ
+    database_limit: 200
+    snapshot_retention_limit: "7"
+    encryption_at_rest: true
+    encryption_in_transit: false
+    apply_immediately: true
   es:
-    version: '7.999999'
+    storage_size: 35
+    encrypt: false # Enable encryption at rest for ElasticSearch (only specific instance family types support it: m4, c4, r4, i2, i3 default: false)
+    version: "7.7"
+    instance_size: "t3.medium.elasticsearch"
+    dedicated_master_type: "t3.medium.elasticsearch"
+    port: 80
+    logs_expire: 7
+    # production_mode:        false # covered by AZ
+    data_nodes_count: 1
+    master_nodes_count: 0
