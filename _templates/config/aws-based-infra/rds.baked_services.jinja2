@@ -28,7 +28,7 @@ locals {
       retention_period         = {{ backups.get('retention_period', true) | lower }}
       hourly_snapshots_enabled = {{ backups.get('hourly_snapshots_enabled', true) | lower }}
       rotate_snapshots = {
-        enabled                    = {{ backups.get('rotate_snapshots', {}).get('enabled', true) }}
+        enabled                    = {{ backups.get('rotate_snapshots', {}).get('enabled', true) | lower }}
         hourly_snapshots_period    = "{{ backups.get('rotate_snapshots', {}).hourly_snapshots_period | default("60 hours ago", true) }}"
         migration_snapshots_period = "{{ backups.get('rotate_snapshots', {}).migration_snapshots_period | default("7 days ago", true) }}"
       }

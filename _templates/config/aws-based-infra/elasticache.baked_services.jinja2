@@ -9,8 +9,8 @@ locals {
     "automatic_failover_enabled" = {{ automatic_failover_enabled | default(false, true) }} # Must be set to FALSE if updating 1 node cluster and set to TRUE if multi_az_enabled is set to TRUE
     "database_limit"             = {{ database_limit | default(200, true) }}
     "snapshot_retention_limit"   = "{{ snapshot_retention_limit | default("7", true) }}"
-    "encryption_at_rest"         = {{ encryption_at_rest | default(true)}}
-    "encryption_in_transit"      = {{ encryption_in_transit | default(false) }}
-    "apply_immediately"          = {{ apply_immediately | default(true) }}
+    "encryption_at_rest"         = {{ encryption_at_rest | default(true) | lower }}
+    "encryption_in_transit"      = {{ encryption_in_transit | default(false) | lower }}
+    "apply_immediately"          = {{ apply_immediately | default(true) | lower }}
   }
 }
