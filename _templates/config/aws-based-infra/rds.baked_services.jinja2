@@ -44,11 +44,11 @@ locals {
         character_set_results    = "{{ parameters.get('reboot_not_required', {}).get('character_set_results', 'utf8') }}"
       }
       reboot_required = {
-        skip_name_resolve  = "{{ parameters.get('reboot_required', {}).get('skip_name_resolve', true) }}"
-        thread_cache_size  = "{{ parameters.get('reboot_required', {}).get('thread_cache_size', true) }}"
-        concurrent_insert  = "{{ parameters.get('reboot_required', {}).get('concurrent_insert', true) }}"
-        thread_pool_size   = "{{ parameters.get('reboot_required', {}).get('thread_pool_size', true) }}"
-        performance_schema = "{{ parameters.get('reboot_required', {}).get('performance_schema', true) }}"
+        skip_name_resolve  = "{{ parameters.get('reboot_required', {}).get('skip_name_resolve', 1) }}"
+        thread_cache_size  = "{{ parameters.get('reboot_required', {}).get('thread_cache_size', 4) }}"
+        concurrent_insert  = "{{ parameters.get('reboot_required', {}).get('concurrent_insert', 1) }}"
+        thread_pool_size   = "{{ parameters.get('reboot_required', {}).get('thread_pool_size', 32) }}"
+        performance_schema = "{{ parameters.get('reboot_required', {}).get('performance_schema', 1) }}"
       }
     }
   }
