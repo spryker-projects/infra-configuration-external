@@ -12,21 +12,21 @@ locals {
     storage_size            = {{ storage_size | default(100, true) }}
     master_username         = local.secrets.locals.master_username
     max_allocated_storage   = {{ max_allocated_storage | default(0, true) }}
-    apply_immediately       = {{ apply_immediately | default(true, true) }}
+    apply_immediately       = {{ apply_immediately | default(true, true) | string }}
     cloudwatch_logs_exports = {
-      "error"     = {{ cloudwatch_logs_exports.get('error', true) }}
-      "general"   = {{ cloudwatch_logs_exports.get('general', true) }}
-      "slowquery" = {{ cloudwatch_logs_exports.get('slowquery', true) }}
-      "audit"     = {{ cloudwatch_logs_exports.get('audit', true) }}
+      "error"     = {{ cloudwatch_logs_exports.get('error', true) | string }}
+      "general"   = {{ cloudwatch_logs_exports.get('general', true) | string }}
+      "slowquery" = {{ cloudwatch_logs_exports.get('slowquery', true) | string }}
+      "audit"     = {{ cloudwatch_logs_exports.get('audit', true) | string  }}
     }
-    skip_final_snapshot = {{ skip_final_snapshot | default(true, true)}}
+    skip_final_snapshot = {{ skip_final_snapshot | default(true, true) | string }}
     performance_insights = {
-      enabled          = {{ performance_insights.get('enabled', true) }}
-      retention_period = {{ performance_insights.get('retention_period', true) }}
+      enabled          = {{ performance_insights.get('enabled', true) | string }}
+      retention_period = {{ performance_insights.get('retention_period', true) | string }}
     }
     backups = {
-      retention_period         = {{ backups.get('retention_period', true) }}
-      hourly_snapshots_enabled = {{ backups.get('hourly_snapshots_enabled', true) }}
+      retention_period         = {{ backups.get('retention_period', true) | string }}
+      hourly_snapshots_enabled = {{ backups.get('hourly_snapshots_enabled', true) | string }}
       rotate_snapshots = {
         enabled                    = {{ backups.get('rotate_snapshots', {}).get('enabled', true) }}
         hourly_snapshots_period    = "{{ backups.get('rotate_snapshots', {}).hourly_snapshots_period | default("60 hours ago", true) }}"
