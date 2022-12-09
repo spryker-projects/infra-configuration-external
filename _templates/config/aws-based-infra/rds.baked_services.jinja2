@@ -34,19 +34,19 @@ locals {
     }
     parameters = {
       reboot_not_required = {
-        character_set_server     = "{{ parameters.reboot_not_required.character_set_server | default("utf8", true) }}"
-        character_set_client     = "{{ parameters.reboot_not_required.character_set_client | default("utf8", true) }}"
-        character_set_connection = "{{ parameters.reboot_not_required.character_set_connection | default("utf8", true) }}"
-        character_set_database   = "{{ parameters.reboot_not_required.character_set_database | default("utf8", true) }}"
-        character_set_filesystem = "{{ parameters.reboot_not_required.character_set_filesystem | default("utf8", true) }}"
-        character_set_results    = "{{ parameters.reboot_not_required.character_set_results | default("utf8", true) }}"
+        character_set_server     = "{{ parameters.get('reboot_not_required', {}).get('character_set_server', 'utf8') }}"
+        character_set_client     = "{{ parameters.get('reboot_not_required', {}).get('character_set_client', 'utf8') }}"
+        character_set_connection = "{{ parameters.get('reboot_not_required', {}).get('character_set_connection', 'utf8') }}"
+        character_set_database   = "{{ parameters.get('reboot_not_required', {}).get('character_set_database', 'utf8') }}"
+        character_set_filesystem = "{{ parameters.get('reboot_not_required', {}).get('character_set_filesystem', 'utf8') }}"
+        character_set_results    = "{{ parameters.get('reboot_not_required', {}).get('character_set_results', 'utf8') }}"
       }
       reboot_required = {
-        skip_name_resolve  = "{{ reboot_required.skip_name_resolve | default("1", true) }}"
-        thread_cache_size  = "{{ reboot_required.thread_cache_size | default("4", true) }}"
-        concurrent_insert  = "{{ reboot_required.concurrent_insert | default("1", true) }}"
-        thread_pool_size   = "{{ reboot_required.thread_pool_size | default("32", true) }}"
-        performance_schema = "{{ reboot_required.performance_schema | default("1", true) }}"
+        skip_name_resolve  = "{{ parameters.get('reboot_required', {}).get('skip_name_resolve', true) }}"
+        thread_cache_size  = "{{ parameters.get('reboot_required', {}).get('thread_cache_size', true) }}"
+        concurrent_insert  = "{{ parameters.get('reboot_required', {}).get('concurrent_insert', true) }}"
+        thread_pool_size   = "{{ parameters.get('reboot_required', {}).get('thread_pool_size', true) }}"
+        performance_schema = "{{ parameters.get('reboot_required', {}).get('performance_schema', true) }}"
       }
     }
   }
