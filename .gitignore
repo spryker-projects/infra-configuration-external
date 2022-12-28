@@ -2,3 +2,17 @@
 .DS_Store
 .git/
 _tmp/
+#  Local .terraform directories and files
+**/.terraform/*
+**/.terragrunt-cache/*
+*.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+*out.terraform*
+
+# provider and backend TG generated
+providers.tf
+backend.tf
