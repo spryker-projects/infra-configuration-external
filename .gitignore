@@ -10,6 +10,8 @@ _tmp/
 # .tfstate files
 *.tfstate
 *.tfstate.*
+*.old
+*.old.*
 
 *out.terraform*
 
