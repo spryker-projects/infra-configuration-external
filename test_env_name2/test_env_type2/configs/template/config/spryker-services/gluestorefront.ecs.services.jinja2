@@ -1,0 +1,40 @@
+locals {
+  service_name                       = "gluestorefront"
+  network_mode                       = "{{ network_mode | default("awsvpc", true) }}"
+  cpu_limit                          = {{ cpu_limit | default(256, true) }}
+  memory_limit                       = {{ memory_limit | default(512, true) }}
+  volumes                            = {{ volumes | default({}, true) }}
+  scheduling_strategy                = "{{ scheduling_strategy | default("REPLICA", true) }}"
+  desired_count                      = {{ desired_count | default(2, true) }}
+  health_check_grace_period_seconds  = {{ health_check_grace_period_seconds | default(15, true )}}
+  deployment_maximum_percent         = {{ deployment_maximum_percent | default(100, true) }}
+  deployment_minimum_healthy_percent = {{ deployment_minimum_healthy_percent | default(0, true) }}
+  autoscaling_enabled                = {{ True if autoscaling_enabled is defined and autoscaling_enabled else False | lower }}
+  autoscaling_min_capacity           = {{ autoscaling_min_capacity | default(1, true) }}
+  autoscaling_max_capacity           = {{ autoscaling_max_capacity | default(1, true) }}
+  load_balancer_type                 = "{{ load_balancer_type | default("internal", true) }}"
+  deregistration_delay               = {{ deregistration_delay | default(10, true) }}
+  logs_expire                        = {{ logs_expire | default(60, true) }}
+  listener_mappings = {
+    fpm = {
+      lb_protocol        = "TCP"
+      lb_port            = 9010
+      container_protocol = "TCP"
+      container_port     = 9000
+      ssl_policy         = null
+      action             = "forward"
+    }
+  }
+  container_definition = {
+    name        = "gluestorefront"
+    image       = null
+    mountPoints = []
+    portMappings = [
+      {
+        containerPort = 9000
+        hostPort      = 9000
+        protocol      = "tcp"
+      }
+    ]
+  }
+}
