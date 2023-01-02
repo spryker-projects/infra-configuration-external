@@ -1,0 +1,7 @@
+kind: s3
+specs:
+  - bucket_name: you_bucket_name
+    bucket_type: private
+  - bucket_name: my_bucket_name
+    bucket_type: public
+
