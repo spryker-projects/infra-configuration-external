@@ -9,7 +9,7 @@ locals {
   health_check_grace_period_seconds  = 15
   deployment_maximum_percent         = 100
   deployment_minimum_healthy_percent = 50
-  autoscaling_enabled                = true
+  autoscaling_enabled                = false
   autoscaling_min_capacity           = 1
   autoscaling_max_capacity           = 1
   load_balancer_type                 = "internal"
