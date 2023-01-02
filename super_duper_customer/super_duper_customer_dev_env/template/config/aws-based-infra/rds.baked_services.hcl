@@ -1,10 +1,15 @@
+
+
+
+
 locals {
   secrets = read_terragrunt_config(find_in_parent_folders("secrets/aws-based-infra/rds.hcl"))
   settings = {
     instance_size           = "db.t3.medium"
-    multi_az                = False
+    multi_az                = false
     engine_version          = "111"
     parameters_group_family = "mariadb10.3"
+    ro_replicas_count       = 0
     storage_size            = 100
     master_username         = local.secrets.locals.master_username
     max_allocated_storage   = 0
@@ -18,13 +23,13 @@ locals {
     skip_final_snapshot = true
     performance_insights = {
       enabled          = true
-      retention_period = 7
+      retention_period = true
     }
     backups = {
       retention_period         = 28
-      hourly_snapshots_enabled = True
+      hourly_snapshots_enabled = true
       rotate_snapshots = {
-        enabled                    = True
+        enabled                    = true
         hourly_snapshots_period    = "60 hours ago"
         migration_snapshots_period = "7 days ago"
       }
