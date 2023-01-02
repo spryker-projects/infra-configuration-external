@@ -1,0 +1,14 @@
+locals {
+  settings = {
+    storage_size          = {{ storage_size | default(35, true) }}
+    encrypt               = {{ encrypt | default(false, true) | lower }} # Enable encryption at rest for ElasticSearch (only specific instance family types support it: m4, c4, r4, i2, i3 default: false)
+    version               = "{{ version | default("7.7", true) }}"
+    instance_size         = "{{ instance_size | default("t3.medium.elasticsearch", true) }}"
+    dedicated_master_type = "{{ dedicated_master_type | default("t3.medium.elasticsearch", true) }}"
+    port                  = {{ port | default(80, true) }}
+    logs_expire           = {{ logs_expire | default(7, true) }}
+    production_mode       = {{ production_mode| default(false, true) | lower }}
+    data_nodes_count      = {{ data_nodes_count | default(1, true) | lower }}
+    master_nodes_count    = {{ master_nodes_count | default(0, true) | lower }}
+  }
+}
