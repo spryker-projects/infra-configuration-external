@@ -1,0 +1,55 @@
+{% set cloudwatch_logs_exports = cloudwatch_logs_exports if cloudwatch_logs_exports is defined else {} %}
+{% set performance_insights = performance_insights if performance_insights is defined else {} %}
+{% set backups = backups if backups is defined else {} %}
+{% set parameters = parameters if parameters is defined else {} %}
+locals {
+  secrets = read_terragrunt_config(find_in_parent_folders("secrets/aws-based-infra/rds.hcl"))
+  settings = {
+    instance_size           = "{{ instance_size | default("db.t3.medium", true) }}"
+    multi_az                = {{ multi_az | default(false, true) | lower }}
+    engine_version          = "{{ engine_version | default("10.3.32", true) }}"
+    parameters_group_family = "{{ parameters_group_family | default("mariadb10.3", true) }}"
+    ro_replicas_count       = {{ ro_replicas_count | default(0, true) }}
+    storage_size            = {{ storage_size | default(100, true) }}
+    master_username         = local.secrets.locals.master_username
+    max_allocated_storage   = {{ max_allocated_storage | default(0, true) }}
+    apply_immediately       = {{ apply_immediately | default(true, true) | lower }}
+    cloudwatch_logs_exports = {
+      "error"     = {{ cloudwatch_logs_exports.get('error', true) | lower }}
+      "general"   = {{ cloudwatch_logs_exports.get('general', true) | lower }}
+      "slowquery" = {{ cloudwatch_logs_exports.get('slowquery', true) | lower }}
+      "audit"     = {{ cloudwatch_logs_exports.get('audit', false) | lower  }}
+    }
+    skip_final_snapshot = {{ skip_final_snapshot | default(true, true) | lower }}
+    performance_insights = {
+      enabled          = {{ performance_insights.get('enabled', true) | lower }}
+      retention_period = {{ performance_insights.get('retention_period', true) | lower }}
+    }
+    backups = {
+      retention_period         = {{ backups.get('retention_period', 28) | lower }}
+      hourly_snapshots_enabled = {{ backups.get('hourly_snapshots_enabled', true) | lower }}
+      rotate_snapshots = {
+        enabled                    = {{ backups.get('rotate_snapshots', {}).get('enabled', true) | lower }}
+        hourly_snapshots_period    = "{{ backups.get('rotate_snapshots', {}).hourly_snapshots_period | default("60 hours ago", true) }}"
+        migration_snapshots_period = "{{ backups.get('rotate_snapshots', {}).migration_snapshots_period | default("7 days ago", true) }}"
+      }
+    }
+    parameters = {
+      reboot_not_required = {
+        character_set_server     = "{{ parameters.get('reboot_not_required', {}).get('character_set_server', 'utf8') }}"
+        character_set_client     = "{{ parameters.get('reboot_not_required', {}).get('character_set_client', 'utf8') }}"
+        character_set_connection = "{{ parameters.get('reboot_not_required', {}).get('character_set_connection', 'utf8') }}"
+        character_set_database   = "{{ parameters.get('reboot_not_required', {}).get('character_set_database', 'utf8') }}"
+        character_set_filesystem = "{{ parameters.get('reboot_not_required', {}).get('character_set_filesystem', 'utf8') }}"
+        character_set_results    = "{{ parameters.get('reboot_not_required', {}).get('character_set_results', 'utf8') }}"
+      }
+      reboot_required = {
+        skip_name_resolve  = "{{ parameters.get('reboot_required', {}).get('skip_name_resolve', 1) }}"
+        thread_cache_size  = "{{ parameters.get('reboot_required', {}).get('thread_cache_size', 4) }}"
+        concurrent_insert  = "{{ parameters.get('reboot_required', {}).get('concurrent_insert', 1) }}"
+        thread_pool_size   = "{{ parameters.get('reboot_required', {}).get('thread_pool_size', 32) }}"
+        performance_schema = "{{ parameters.get('reboot_required', {}).get('performance_schema', 1) }}"
+      }
+    }
+  }
+}
