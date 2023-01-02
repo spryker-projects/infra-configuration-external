@@ -1,0 +1,16 @@
+locals {
+  settings = {
+    "instance_size"              = "{{ instance_size | default("cache.t3.medium", true) }}" # previously t2.medium, BTW, are we really need medium (3 Gb) Redis on stage envs? We can use small (1.37 Gb)
+    "port"                       = {{ port | default(6379, true) }}
+    "number_cache_clusters"      = {{ number_cache_clusters | default(1, true) }}       # must be at least 2 if multi_az_enabled = TRUE
+    "engine_version"             = "{{ engine_version | default("3.2.6", true) }}" # newest is 3.2.10
+    "parameter_group_family"     = "{{ parameter_group_family | default("redis3.2", true) }}"
+    "multi_az_enabled"           = {{ multi_az_enabled | default(false, true) | lower }} # When set to TRUE, make Terraform Apply, then set "automatic_failover_enabled" to TRUE and make Terraform Apply again
+    "automatic_failover_enabled" = {{ automatic_failover_enabled | default(false, true) | lower }} # Must be set to FALSE if updating 1 node cluster and set to TRUE if multi_az_enabled is set to TRUE
+    "database_limit"             = {{ database_limit | default(200, true) }}
+    "snapshot_retention_limit"   = "{{ snapshot_retention_limit | default("7", true) }}"
+    "encryption_at_rest"         = {{ encryption_at_rest | default(true) | lower }}
+    "encryption_in_transit"      = {{ encryption_in_transit | default(false) | lower }}
+    "apply_immediately"          = {{ apply_immediately | default(true) | lower }}
+  }
+}
