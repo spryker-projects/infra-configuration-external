@@ -1,0 +1,12 @@
+kind: bastion
+specs:
+  instance_name: test1
+  settings:
+    size: t3a.micro1
+    ebs_size: 101
+    ebs_iops: iops1
+    ebs_type: gp31
+    ebs_block_device_encrypted: true
+  vpn_cidr: 10.8.0.1/24
+  sftp_enable: false
+  efs_infrequent_access_transition_policy: AFTER_91_DAYS
